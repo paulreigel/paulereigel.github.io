@@ -1,0 +1,58 @@
+
+### Variables
+@port = 3000
+
+### Put ID of the item you are testing below (Id in mongodb)
+@menuid = 6631bb26a658df24a0fc05a3
+
+@eventid = 6631cd62081733d82e933374
+
+############## Menu
+### Get menu
+
+GET http://localhost:{{port}}/api/menu
+
+### Create a menu item
+
+POST http://localhost:{{port}}/api/menu
+Content-Type: application/json
+
+{
+  "name": "Test Name",
+  "description": "Test Description",
+  "price": "$500.00"
+}
+
+### Change a menu item's name, desc, and price by using mongo id
+
+PUT http://localhost:{{port}}/api/menu/{{menuid}}
+
+### Delete a menu item by its mongo id
+
+DELETE http://localhost:{{port}}/api/menu/{{menuid}}
+
+
+################ Events 
+### Get events
+
+GET http://localhost:{{port}}/api/events
+
+### Create a event
+
+POST http://localhost:{{port}}/api/events
+Content-Type: application/json
+
+{
+  "name": "test name 500",
+  "location": "test location 500",
+  "dates": "02-18-2025 to 02-20-2025",
+  "hours": "12am to 12pm"
+}
+
+### Change a events name, location, dates, and hours by using mongo id
+
+PUT http://localhost:{{port}}/api/events/{{eventid}}
+
+### Delete a event by its mongo id
+
+DELETE http://localhost:{{port}}/api/events/{{eventid}}

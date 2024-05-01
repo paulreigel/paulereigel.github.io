@@ -16,6 +16,10 @@ app.use(express.json())
 // middleware to access static files in public folder
 app.use(express.static('public'))
 
+// Use api-routes
+app.use('/api/menu', require('./api-routes-menu'))
+app.use('/api/events', require('./api-routes-events'))
+
 // route to get the root url sending the home.html back to the client
 app.get('/', (request, response) => {
     response.sendFile('home.html', { root })
