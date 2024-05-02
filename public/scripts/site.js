@@ -17,39 +17,55 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+//script for events window on home page
 document.addEventListener('DOMContentLoaded', () => {
-    const eventsButton = document.querySelector('#events-button');
-    const eventsContainer = document.querySelector('#events-container');
-    const eventsText = document.querySelector('.events p');
+    const eventCardContainer = document.getElementById('event-card-container');
+    const prevEventButton = document.getElementById('prev-event-button');
+    const nextEventButton = document.getElementById('next-event-button');
 
-    // Define the events array (replace with your actual data)
-    const events = ['Event 1', 'Event 2', 'Event 3'];
+    // JSON array of events
+    const events = [
+        { title: "SummerFest", description: "Location Date Time" },
+        { title: "Low Country Cajun Fest", description: "Location Date Time" },
+        { title: "Mile of Music", description: "Location Date Time" }
+    ];
+    let currentEventIndex = 0;
 
-    // Add event listener to the button
-    eventsButton.addEventListener('click', () => {
-        //console.log('Button clicked!');
-        // Hide the p tag
-        eventsText.style.display = 'none';
-         // Clear previous events
-         eventsContainer.innerHTML = '';
+    // Function to display current event
+    const displayEvent = () => {
+        const currentEvent = events[currentEventIndex];
+        eventCardContainer.innerHTML = `
+            <div class="event-card">
+                <h2>${currentEvent.title}</h2>
+                <p id="event-description" class="event-description" style="visibility: hidden;">${currentEvent.description}</p>
+                <button id="more-info-button">More Info</button>
+                
+            </div>
+        `;
+    };
 
-          // Create ul element
-        const ul = document.createElement('ul');
+    // Initial display
+    displayEvent();
 
-        // Populate ul with events
-        events.forEach(event => {
-            const li = document.createElement('li');
-            li.textContent = event;
-            ul.appendChild(li);
+    // Event listener for previous button
+    prevEventButton.addEventListener('click', () => {
+        currentEventIndex = (currentEventIndex - 1 + events.length) % events.length;
+        displayEvent();
+    });
 
-            // Apply CSS styles to the dynamically created li elements
-            li.style.fontSize = '1.5em'; // Adjust font size as needed
-            //li.style.textAlign = 'center'; // Center align text
-            li.style.marginBottom = '10px'; // Add margin bottom
-            li.style.marginLeft = '-45px';
-        });
-    
-        // Append ul to events container
-        eventsContainer.appendChild(ul);
+    // Event listener for next button
+    nextEventButton.addEventListener('click', () => {
+        currentEventIndex = (currentEventIndex + 1) % events.length;
+        displayEvent();
+    });
+
+    // Event listener for "More Info" button
+    eventCardContainer.addEventListener('click', (event) => {
+        if (event.target && event.target.id === 'more-info-button') {
+            const descriptionElement = document.getElementById('event-description');
+            descriptionElement.style.display = 'block';
+            descriptionElement.style.visibility = 'visible';
+        }
     });
 });
+

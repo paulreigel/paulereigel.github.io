@@ -49,7 +49,7 @@
 }
 
 .p-container {
-    max-width: 450px; /* Set the maximum width of the paragraph container */
+    max-width:80%; /* Set the maximum width of the paragraph container */
     margin: 0 auto; /* Center-align the paragraph container */
 }
 
@@ -57,37 +57,78 @@
     text-align: center; /* Center-align the text of the paragraph */
     font-size: 25px;
 }
-
+/*styles for events container*/
 .events  {
     text-align: center; 
+    position: relative; /* Set container position to relative */
+    width: 40%; /* Set the width to 80% of the parent container */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px; /* Add padding for spacing */
+    border: 1px solid #ccc; /* Add a border for visual separation */
+    border-radius: 10px; /* Add border radius for rounded corners */
+    height: 250px; /* Set a fixed height for the event container */
+    overflow: hidden; /* Hide overflow content */
+}
+
+.arrow-button {
+    position: absolute; /* Position the buttons absolutely */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust vertical positioning */
+    width: 50px; /* Set button width */
+    height: 50px; /* Set button height */
+    background-color: transparent; /* Transparent background */
+    border: none; /* Remove border */
+    color: #f15723; /* Set button color */
+    font-size: 24px; /* Set font size */
+    cursor: pointer; /* Change cursor on hover */
+    outline: none; /* Remove outline */
+}
+
+.left-arrow {
+    left: 0; /* Position the left arrow to the left */
+}
+
+.right-arrow {
+    right: 0; /* Position the right arrow to the right */
+}
+
+.event-window {
+    position: relative; /* Set container position to relative */
+    width: calc(100% - 120px); /* Calculate width of window between arrows */
+    margin: 0 auto; /* Center horizontally */
+    overflow: hidden; /* Hide overflow */
+}
+
+#event-card-container {
+    display: flex; /* Use flexbox for event cards */
+    flex-direction: column; /* Arrange items vertically */
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    height: 100%; /* Set height to fill the container */
+    transition: transform 0.5s ease; /* Add smooth transition for sliding effect */
 }
 
 .events button {
-    font-size: 1.2em; /* Larger font size */
-    padding: 10px 20px; /* Increase padding */
-    margin-top: 20px; /* Add margin on top */
+    font-size: 1.2em; /* Larger font size*/ 
+    padding: 10px 20px; /* Increase padding*/ 
+    margin-top: 5px; /* Add margin on top*/ 
     background-color: #f15723;
     color: white;
+    border-radius: 5%;
 }
 
-.events-container {
-    margin-top: 20px; /* Add space between button and events container */
-}
-
-.events-container ul {
-    list-style-type: none; /* Remove default list style */
-    padding: 0; /* Remove default padding */
-}
-
-.events-container li {
-    margin-bottom: 10px; /* Add space between list items */
-    font-size:2.5em;
-    margin-left: 10px;
-}
-
-
-ul { 
-    list-style-type: none;
+.more-info-button {
+    position: absolute; /* Position the button absolutely */
+    bottom: 20px; /* Set distance from the bottom */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center horizontally */
+    padding: 10px 20px; /* Add padding */
+    background-color: #f15723; /* Orange background color */
+    color: white; /* White text color */
+    border: none; /* Remove border */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Cursor style */
+    transition: background-color 0.3s ease; /* Smooth transition */
 }
 
 /*Menu page styles*/
@@ -236,4 +277,6 @@ footer {
         width: 100%;
         margin-bottom: 20px;
     }
+
+    
 }
