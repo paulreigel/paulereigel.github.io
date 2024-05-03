@@ -11,14 +11,14 @@ const getCollection = async (dbName, collectionName) => {
 
 // GET /api/events
 Router.get('/', async (request, response) => {
-	const collection = await getCollection('food-truck', 'events')
+	const collection = await getCollection('Events-API', 'Events')
 	const result = await collection.find({}).toArray()
     response.json(result)
 })
 
 // POST /api/events
 Router.post('/', async (request, response) => {
-	const collection = await getCollection('food-truck', 'events')
+	const collection = await getCollection('Events-API', 'Events')
 	const { name, location, dates, hours } = request.body
     const result = await collection.insertOne({ name, location, dates, hours })
     response.json(result)
@@ -26,7 +26,7 @@ Router.post('/', async (request, response) => {
 
 // PUT /api/events
 Router.put('/:id', async (request, response) => {
-	const collection = await getCollection('food-truck', 'events')
+	const collection = await getCollection('Events-API', 'Events')
 	const { id } = request.params
 	const name = "test name"
     const location = "test location"
@@ -38,7 +38,7 @@ Router.put('/:id', async (request, response) => {
 
 // DELETE /api/events
 Router.delete('/:id', async (request, response) => {
-	const collection = await getCollection('food-truck', 'events')
+	const collection = await getCollection('Events-API', 'Events')
 	const { id } = request.params
     const result = await collection.deleteOne({ _id: new ObjectId(id) })
 	response.json(result)

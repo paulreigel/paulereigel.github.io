@@ -11,14 +11,14 @@ const getCollection = async (dbName, collectionName) => {
 
 // GET /api/menu
 Router.get('/', async (request, response) => {
-	const collection = await getCollection('food-truck', 'menu')
+	const collection = await getCollection('Menu-API', 'Menu')
 	const result = await collection.find({}).toArray()
     response.json(result)
 })
 
 // POST /api/menu
 Router.post('/', async (request, response) => {
-	const collection = await getCollection('food-truck', 'menu')
+	const collection = await getCollection('Menu-API', 'Menu')
 	const { name, description, price } = request.body
     const result = await collection.insertOne({ name, description, price })
     response.json(result)
@@ -26,7 +26,7 @@ Router.post('/', async (request, response) => {
 
 // PUT /api/menu
 Router.put('/:id', async (request, response) => {
-	const collection = await getCollection('food-truck', 'menu')
+	const collection = await getCollection('Menu-API', 'Menu')
 	const { id } = request.params
 	const name = "test name"
     const description = "test desc"
@@ -37,7 +37,7 @@ Router.put('/:id', async (request, response) => {
 
 // DELETE /api/menu
 Router.delete('/:id', async (request, response) => {
-	const collection = await getCollection('food-truck', 'menu')
+	const collection = await getCollection('Menu-API', 'Menu')
 	const { id } = request.params
     const result = await collection.deleteOne({ _id: new ObjectId(id) })
 	response.json(result)

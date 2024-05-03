@@ -3,9 +3,9 @@
 @port = 3000
 
 ### Put ID of the item you are testing below (Id in mongodb)
-@menuid = 6631bb26a658df24a0fc05a3
+@menuid = 
 
-@eventid = 6631cd62081733d82e933374
+@eventid = 
 
 ############## Menu
 ### Get menu
