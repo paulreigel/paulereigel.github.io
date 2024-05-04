@@ -66,7 +66,7 @@
     padding: 20px; /* Add padding for spacing */
     border: 1px solid #ccc; /* Add a border for visual separation */
     border-radius: 10px; /* Add border radius for rounded corners */
-    height: 250px; /* Set a fixed height for the event container */
+    height: 350px; /* Set a fixed height for the event container */
     overflow: hidden; /* Hide overflow content */
 }
 
@@ -118,8 +118,8 @@
 }
 
 .more-info-button {
-    position: absolute; /* Position the button absolutely */
-    bottom: 20px; /* Set distance from the bottom */
+    position: relative; /* Position the button absolutely */
+    bottom:10px; /* Set distance from the bottom */
     left: 50%; /* Center horizontally */
     transform: translateX(-50%); /* Center horizontally */
     padding: 10px 20px; /* Add padding */
@@ -131,6 +131,10 @@
     transition: background-color 0.3s ease; /* Smooth transition */
 }
 
+.event-details {
+    color: red;
+    
+}
 /*Menu page styles*/
 .menu-container {
     display: flex;
@@ -208,6 +212,23 @@
 
 .contact-form input[type="submit"]:hover {
     background-color: #d14000;
+}
+
+.admin-events {
+    width: 80%;
+    margin: 0 auto;
+    height:300px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.admin-events h2 {
+    text-align:center;
+}
+span {
+    font-weight: bold;
+    font-size: larger;
+    padding: 10px;
 }
 
 footer {

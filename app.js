@@ -28,3 +28,16 @@ app.get('/', (request, response) => {
 
 
 app.listen(port, () => console.log(`Server is running http://localhost:${port}`))
+
+(async () => {
+    try {
+        const response = await fetch('/api/Events');
+        if (!response.ok) {
+            throw new Error('Failed to fetch data');
+        }
+        const data = await response.json();
+        console.log(data); // Log the fetched data to the console
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+})();

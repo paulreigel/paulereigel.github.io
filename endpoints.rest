@@ -35,6 +35,7 @@ DELETE http://localhost:{{port}}/api/menu/{{menuid}}
 ################ Events 
 ### Get events
 
+
 GET http://localhost:{{port}}/api/events
 
 ### Create a event
