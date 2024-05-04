@@ -25,13 +25,9 @@ app.get('/', (request, response) => {
     response.sendFile('home.html', { root })
 })
 
-
-
-app.listen(port, () => console.log(`Server is running http://localhost:${port}`))
-
-(async () => {
+;(async () => {
     try {
-        const response = await fetch('/api/Events');
+        const response = await fetch('http://localhost:' + port + '/api/events');
         if (!response.ok) {
             throw new Error('Failed to fetch data');
         }
@@ -41,3 +37,5 @@ app.listen(port, () => console.log(`Server is running http://localhost:${port}`)
         console.error('Error fetching data:', error);
     }
 })();
+
+app.listen(port, () => console.log(`Server is running http://localhost:${port}`))
