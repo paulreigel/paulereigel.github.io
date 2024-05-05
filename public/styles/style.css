@@ -61,7 +61,7 @@
 .events  {
     text-align: center; 
     position: relative; /* Set container position to relative */
-    width: 40%; /* Set the width to 80% of the parent container */
+    width: 80%; /* Set the width to 80% of the parent container */
     margin: 0 auto; /* Center the container horizontally */
     padding: 20px; /* Add padding for spacing */
     border: 1px solid #ccc; /* Add a border for visual separation */
@@ -131,10 +131,15 @@
     transition: background-color 0.3s ease; /* Smooth transition */
 }
 
+.event-card,
 .event-details {
-    color: red;
+    max-width: 80%; /* Limit the maximum width of the divs */
+    margin: 0 auto; /* Center the divs horizontally */
+    padding: 20px; /* Add padding for spacing */
     
+   /* box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
+
 /*Menu page styles*/
 .menu-container {
     display: flex;
@@ -213,18 +218,30 @@
 .contact-form input[type="submit"]:hover {
     background-color: #d14000;
 }
-
+/*admin page manage events div*/
 .admin-events {
     width: 80%;
     margin: 0 auto;
-    height:300px;
+    overflow: auto;
     border: 1px solid black;
     text-align: center;
 }
 
-.admin-events h2 {
-    text-align:center;
+span {
+    font-weight: bold;
+    font-size: larger;
+    padding: 10px;
 }
+
+/*admin page manage events div*/
+.admin-menu {
+    width: 80%;
+    margin: 0 auto;
+    overflow: auto;
+    border: 1px solid black;
+    text-align: center;
+}
+
 span {
     font-weight: bold;
     font-size: larger;
@@ -299,5 +316,13 @@ footer {
         margin-bottom: 20px;
     }
 
-    
+    .event-card, .event-details {
+       max-width: 90%;
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .event-details {
+        max-width: 95%;
+    }
 }

@@ -158,6 +158,51 @@ const displayEventNames = (events) => {
         adminEventsDiv.appendChild(eventContainer);
     });
 };
+//ADMIN MENU
+
+(async () => {
+    try {
+        const response = await fetch('/api/menu');
+        const menuItems = await response.json();
+        displayMenuItems(menuItems);
+    } catch (error) {
+        console.error('Error fetching menu items:', error);
+    }
+})();
+
+const displayMenuItems = (menuItems) => {
+    const adminMenuDiv = document.querySelector('.admin-menu');
+    adminMenuDiv.innerHTML = '';
+
+    menuItems.forEach(menuItem => {
+        const menuItemContainer = document.createElement('div');
+        menuItemContainer.classList.add('menu-item-container');
+
+        const menuItemName = document.createElement('span');
+        menuItemName.textContent = menuItem.Name;
+        menuItemContainer.appendChild(menuItemName);
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        menuItemContainer.appendChild(checkbox);
+
+        const itemDetails = document.createElement('div');
+        itemDetails.classList.add('menu-item-details');
+        itemDetails.innerHTML = `
+            <p><strong>Description:</strong> ${menuItem.Description}</p>
+            <p><strong>Price:</strong> ${menuItem.Price}</p>
+            <img src="${menuItem.ImgURL}" alt="${menuItem.Name}" width="200">
+        `;
+        itemDetails.style.display = 'none';
+        menuItemContainer.appendChild(itemDetails);
+
+        checkbox.addEventListener('change', () => {
+            itemDetails.style.display = checkbox.checked ? 'block' : 'none';
+        });
+
+        adminMenuDiv.appendChild(menuItemContainer);
+    });
+};
 /*const displayEventNames = (events) => {
     const adminEventsDiv = document.querySelector('.admin-events');
     adminEventsDiv.innerHTML = '';
