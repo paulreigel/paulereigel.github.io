@@ -33,6 +33,8 @@ const getMenu = async () => {
         currentItem.querySelector('h2').textContent = menuItem.Name
         currentItem.querySelectorAll('p')[0].textContent = menuItem.Description
         currentItem.querySelectorAll('p')[1].textContent = menuItem.Price
+        currentItem.querySelectorAll('img')[0].src = menuItem.ImgURL
+        currentItem.querySelectorAll('img')[0].alt = menuItem.Name
     })
 }
 
@@ -42,7 +44,7 @@ const getMenu = async () => {
 //EVENTS FETCH
 (async () => {
     try {
-        const response = await fetch('/api/Events');
+        const response = await fetch('/api/events');
         if (!response.ok) {
             throw new Error('Failed to fetch data');
         }
@@ -113,8 +115,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             eventDetails.classList.add('event-details');
             eventDetails.innerHTML = `
                 <p><strong>Location:</strong> ${currentEvent.location}</p>
-                <p><strong>Date:</strong> ${currentEvent.date}</p>
-                <p><strong>Time:</strong> ${currentEvent.time}</p>
+                <p><strong>Date:</strong> ${currentEvent.dates}</p>
+                <p><strong>Time:</strong> ${currentEvent.hours}</p>
                 
             `;
             eventCardContainer.appendChild(eventDetails);
