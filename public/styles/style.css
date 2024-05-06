@@ -248,6 +248,17 @@ span {
     padding: 10px;
 }
 
+ label {
+    font-size: 10px;
+    margin-left: 10px;
+}
+/*add event div*/
+.add-event, .add-menu {
+    max-width: 20%;
+    margin-left: 10%; 
+}
+
+
 footer {
     display: flex;
     justify-content: center;

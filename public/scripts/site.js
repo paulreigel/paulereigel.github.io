@@ -34,13 +34,13 @@ const getMenu = async () => {
         currentItem.querySelectorAll('p')[0].textContent = menuItem.Description
         currentItem.querySelectorAll('p')[1].textContent = menuItem.Price
         currentItem.querySelectorAll('img')[0].src = menuItem.ImgURL
-        currentItem.querySelectorAll('img')[0].alt = menuItem.Name
+        currentItem.querySelectorAll('img')[0].alt = menuItem.Namethose
     })
 }
 
 
 
-
+/////////////////////////////////////////////////////////////
 //EVENTS FETCH
 (async () => {
     try {
@@ -54,8 +54,6 @@ const getMenu = async () => {
         console.error('Error fetching data:', error);
     }
 })()
-
-
 
 document.addEventListener('DOMContentLoaded', async () => {
     const eventCardContainer = document.getElementById('event-card-container');
@@ -124,7 +122,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 });
-//Events Admin
+//////////////////////////////////////////////////////////////////////////////////
+//Events Admin GET display
 const displayEventNames = (events) => {
     const adminEventsDiv = document.querySelector('.admin-events');
     adminEventsDiv.innerHTML = '';
@@ -141,6 +140,15 @@ const displayEventNames = (events) => {
         checkbox.type = 'checkbox';
         eventContainer.appendChild(checkbox);
 
+        const checkboxLabel = document.createElement('label');
+        checkboxLabel.textContent = 'More info';
+        eventContainer.appendChild(checkboxLabel);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.classList.add('delete-button');
+        eventContainer.appendChild(deleteButton);
+
         const eventDetails = document.createElement('div');
         eventDetails.classList.add('event-details');
         eventDetails.innerHTML = `
@@ -154,11 +162,30 @@ const displayEventNames = (events) => {
         checkbox.addEventListener('change', () => {
             eventDetails.style.display = checkbox.checked ? 'block' : 'none';
         });
+        //////////////
+        deleteButton.addEventListener('click', async () => {
+            try {
+                // Send DELETE request to API endpoint
+                const response = await fetch(`/api/events/${event._id}`, {
+                    method: 'DELETE',
+                });
 
+                if (response.ok) {
+                    // Remove the event container from the DOM
+                    eventContainer.remove();
+                } else {
+                    console.error('Failed to delete event');
+                }
+            } catch (error) {
+                console.error('Error deleting event:', error);
+            }
+        }); // <-- Added closing bracket for deleteButton.addEventListener
         adminEventsDiv.appendChild(eventContainer);
     });
 };
-//ADMIN MENU
+
+//////////////////////////////////////////////////////////////////////////////
+//ADMIN MENU GET Display
 
 (async () => {
     try {
@@ -186,6 +213,15 @@ const displayMenuItems = (menuItems) => {
         checkbox.type = 'checkbox';
         menuItemContainer.appendChild(checkbox);
 
+        const checkboxLabel = document.createElement('label');
+        checkboxLabel.textContent = 'More Info'; // Customize label text as needed
+        menuItemContainer.appendChild(checkboxLabel);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.classList.add('delete-button');
+        menuItemContainer.appendChild(deleteButton);
+
         const itemDetails = document.createElement('div');
         itemDetails.classList.add('menu-item-details');
         itemDetails.innerHTML = `
@@ -199,35 +235,115 @@ const displayMenuItems = (menuItems) => {
         checkbox.addEventListener('change', () => {
             itemDetails.style.display = checkbox.checked ? 'block' : 'none';
         });
+        ////////////////////////DELETE
+
+       deleteButton.addEventListener('click', async () => {
+            try {
+                // Send DELETE request to API endpoint
+                const response = await fetch(`/api/menu/${menuItem._id}`, {
+                    method: 'DELETE',
+                });
+
+                if (response.ok) {
+                    // Remove the menu item container from the DOM
+                    menuItemContainer.remove();
+                } else {
+                    console.error('Failed to delete menu item');
+                }
+            } catch (error) {
+                console.error('Error deleting menu item:', error);
+            }
+        });
 
         adminMenuDiv.appendChild(menuItemContainer);
     });
 };
-/*const displayEventNames = (events) => {
-    const adminEventsDiv = document.querySelector('.admin-events');
-    adminEventsDiv.innerHTML = '';
+///////////////////////////////////////////////////////////////////////
+//ADD EVENTS
+const eventForm = document.getElementById('event-form');
 
-    events.forEach(event => {
-        const eventContainer = document.createElement('div');
-        eventContainer.classList.add('event-container');
+eventForm.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Prevent form submission
+    
+    // Get form input values
+    const name = document.getElementById('event-name').value;
+    const location = document.getElementById('event-location').value;
+    const dates = document.getElementById('event-dates').value;
+    const hours = document.getElementById('event-hours').value;
+    
+    // Create data object
+    const eventData = { name, location, dates, hours };
+    
+    try {
+        // Send POST request to API endpoint
+        const response = await fetch('/api/events', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(eventData)
+        });
+        
+        // Check if request was successful
+        if (response.ok) {
+            const newEvent = await response.json();
+            window.location.reload();//refresh the page after event is added
+            console.log('New event added:', newEvent);
+            
+            // Clear form inputs
+            eventForm.reset();
+            
+        } else {
+            console.error('Failed to add new event');
+            //  handle error and display an error message
+        }
+    } catch (error) {
+        console.error('Error adding new event:', error);
+        
+    }
+});
+/////////////////////////////////////////////////////////////
+//ADD MENU
+const menuForm = document.getElementById('menu-form');
 
-        const eventName = document.createElement('span');
-        eventName.textContent = event.name;
-        eventContainer.appendChild(eventName);
-
-        const updateButton = createButton('Update');
-        eventContainer.appendChild(updateButton);
-
-        const deleteButton = createButton('Delete');
-        eventContainer.appendChild(deleteButton);
-
-        adminEventsDiv.appendChild(eventContainer);
-    });
-};
-
-const createButton = (label) => {
-    const button = document.createElement('button');
-    button.textContent = label;
-    button.classList.add(label.toLowerCase());
-    return button;
-};*/
+menuForm.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Prevent form submission
+    
+    // Get form input values
+    const name = document.getElementById('menu-name').value;
+    const description = document.getElementById('menu-description').value;
+    const price = document.getElementById('menu-price').value;
+    //const imgUrl = document.getElementById('menu-ImgUrl').value;
+    
+    // Create data object
+    const menuItemData = { name, description, price, imgURL };
+    
+    try {
+        // Send POST request to API endpoint
+        const response = await fetch('/api/menu', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(menuItemData)
+        });
+        
+        // Check if request was successful
+        if (response.ok) {
+            const newMenuItem = await response.json();
+            console.log('New menu item added:', newMenuItem);
+            
+            // Optionally, display a success message or update the UI
+            
+            // Clear form inputs
+            menuForm.reset();
+            
+        } else {
+            console.error('Failed to add new menu item');
+            // Optionally, handle error and display an error message
+        }
+    } catch (error) {
+        console.error('Error adding new menu item:', error);
+        // Optionally, handle error and display an error message
+    }
+});
