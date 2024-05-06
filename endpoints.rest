@@ -18,9 +18,10 @@ POST http://localhost:{{port}}/api/menu
 Content-Type: application/json
 
 {
-  "name": "Test Name",
-  "description": "Test Description",
-  "price": "$500.00"
+  "Name": "Test Name",
+  "Description": "Test Description",
+  "Price": "$500.00",
+  "ImgURL": "https://www.steaksandgame.com/images/Product/medium/exotic-eats-what-does-alligator-taste-like-1S-5862.jpg"
 }
 
 ### Change a menu item's name, desc, and price by using mongo id

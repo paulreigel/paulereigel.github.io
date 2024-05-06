@@ -310,13 +310,13 @@ menuForm.addEventListener('submit', async (e) => {
     e.preventDefault(); // Prevent form submission
     
     // Get form input values
-    const name = document.getElementById('menu-name').value;
-    const description = document.getElementById('menu-description').value;
-    const price = document.getElementById('menu-price').value;
-    //const imgUrl = document.getElementById('menu-ImgUrl').value;
+    const Name = document.getElementById('menu-name').value;
+    const Description = document.getElementById('menu-description').value;
+    const Price = document.getElementById('menu-price').value;
+    const ImgURL = document.getElementById('menu-ImgUrl').value;
     
     // Create data object
-    const menuItemData = { name, description, price, imgURL };
+    const menuItemData = { Name, Description, Price, ImgURL };
     
     try {
         // Send POST request to API endpoint
@@ -331,6 +331,7 @@ menuForm.addEventListener('submit', async (e) => {
         // Check if request was successful
         if (response.ok) {
             const newMenuItem = await response.json();
+            window.location.reload();//refresh the page after event is added
             console.log('New menu item added:', newMenuItem);
             
             // Optionally, display a success message or update the UI

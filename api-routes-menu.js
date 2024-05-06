@@ -19,8 +19,8 @@ Router.get('/', async (request, response) => {
 // POST /api/menu
 Router.post('/', async (request, response) => {
 	const collection = await getCollection('Menu-API', 'Menu')
-	const { name, description, price } = request.body
-    const result = await collection.insertOne({ name, description, price })
+	const { Name, Description, Price, ImgURL } = request.body
+    const result = await collection.insertOne({ Name, Description, Price, ImgURL })
     response.json(result)
 })
 
@@ -28,10 +28,11 @@ Router.post('/', async (request, response) => {
 Router.put('/:id', async (request, response) => {
 	const collection = await getCollection('Menu-API', 'Menu')
 	const { id } = request.params
-	const name = "test name"
-    const description = "test desc"
-    const price = "$test price"
-	const result = await collection.updateOne({ _id: new ObjectId({ id }) }, { $set: { name, description, price } })
+	const Name = "test name"
+    const Description = "test desc"
+    const Price = "$test price"
+	const ImgURL = "https://www.steaksandgame.com/images/Product/medium/exotic-eats-what-does-alligator-taste-like-1S-5862.jpg"
+	const result = await collection.updateOne({ _id: new ObjectId({ id }) }, { $set: { Name, Description, Price, ImgURL } })
 	response.json(result)
 })
 
