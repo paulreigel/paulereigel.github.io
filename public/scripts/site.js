@@ -20,25 +20,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // On load of the MENU page it calls the getMenu function to load all the menu item data
 document.addEventListener('DOMContentLoaded', async () => {
+    await createMenuCards()
     await getMenu()
 })
+
+// Creates menu item cards dynamically on how many menu items are in the mongodb
+const createMenuCards = async () => {
+    const response = await fetch('/api/menu')
+    const menuItems = await response.json()
+    const menuContainer = document.querySelectorAll('.menu-container')
+    
+    menuItems.forEach(async (menuItem, index) => {
+        menuContainer[0].appendChild(document.createElement('div')).className = 'menu-item'     
+        const menuItemCard = document.querySelectorAll('.menu-item')
+        menuItemCard[index].appendChild(document.createElement('h2'))
+        menuItemCard[index].appendChild(document.createElement('p'))
+        menuItemCard[index].appendChild(document.createElement('p'))
+        menuItemCard[index].appendChild(document.createElement('img'))
+    })  
+}
 
 // Fetch menu item data from mongodb and inputs data as text content to it's specific tags
 const getMenu = async () => {
     const response = await fetch('/api/menu')
     const menuItems = await response.json()
     
-    menuItems.forEach((menuItem, index) => {
+    menuItems.forEach(async (menuItem, index) => {
         const currentItem = document.querySelectorAll('.menu-item')[index]
         currentItem.querySelector('h2').textContent = menuItem.Name
         currentItem.querySelectorAll('p')[0].textContent = menuItem.Description
         currentItem.querySelectorAll('p')[1].textContent = menuItem.Price
         currentItem.querySelectorAll('img')[0].src = menuItem.ImgURL
-        currentItem.querySelectorAll('img')[0].alt = menuItem.Namethose
+        currentItem.querySelectorAll('img')[0].alt = menuItem.Name
     })
 }
-
-
 
 /////////////////////////////////////////////////////////////
 //EVENTS FETCH
