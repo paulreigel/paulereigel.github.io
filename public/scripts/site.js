@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 });
 //////////////////////////////////////////////////////////////////////////////////
-//Events Admin GET display
+//Events Admin GET display GOOD CODE
 const displayEventNames = (events) => {
     const adminEventsDiv = document.querySelector('.admin-events');
     adminEventsDiv.innerHTML = '';
@@ -164,6 +164,11 @@ const displayEventNames = (events) => {
         deleteButton.classList.add('delete-button');
         eventContainer.appendChild(deleteButton);
 
+        const updateButton = document.createElement('button');
+        updateButton.textContent = 'Update';
+        updateButton.classList.add('update-button');
+        eventContainer.appendChild(updateButton);
+
         const eventDetails = document.createElement('div');
         eventDetails.classList.add('event-details');
         eventDetails.innerHTML = `
@@ -177,6 +182,28 @@ const displayEventNames = (events) => {
         checkbox.addEventListener('change', () => {
             eventDetails.style.display = checkbox.checked ? 'block' : 'none';
         });
+
+        // Event listener for update button
+        /*updateButton.addEventListener('click', async () => {
+            try {
+                // Fetch event data from the API
+                const response = await fetch(`/api/events/${event._id}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch event data');
+                }
+                const eventData = await response.json();
+        
+                // Populate the update form with the event data
+                const updateForm = document.getElementById('update-event-form');
+                updateForm.querySelector('event-name').value = eventData.name;
+                updateForm.querySelector('event-location').value = eventData.location;
+                updateForm.querySelector('event-dates').value = eventData.dates;
+                updateForm.querySelector('#event-hours').value = eventData.hours;
+            } catch (error) {
+                console.error('Error updating event:', error);
+            }
+        });*/
+
         //////////////
         deleteButton.addEventListener('click', async () => {
             try {
@@ -194,11 +221,20 @@ const displayEventNames = (events) => {
             } catch (error) {
                 console.error('Error deleting event:', error);
             }
+            // Event listener for update button
+        updateButton.addEventListener('click', () => {
+            // Handle update button click event
+            // You can add your update logic here
+            console.log('Update button clicked for event:', event);
+        });
         }); // <-- Added closing bracket for deleteButton.addEventListener
         adminEventsDiv.appendChild(eventContainer);
     });
-};
+};////below is update in div GOOD CODE ABOVE
 
+
+
+      
 //////////////////////////////////////////////////////////////////////////////
 //ADMIN MENU GET Display
 

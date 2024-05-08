@@ -253,12 +253,42 @@ span {
     margin-left: 10px;
 }
 /*add event div*/
-.add-event, .add-menu {
+.add-event, .add-menu  {
+    font-family: Arial, Helvetica, sans-serif;
     max-width: 20%;
     margin-left: 10%; 
 }
+.add-update-container, .add-update-menu {
+    display: flex;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
+.add-event, .update-event {
+    margin-right: 20px; /* Adjust as needed */
+}
+.update-event form {
+    max-width: 20%; /* Limit the width of the form */
+    
+    flex-direction: column; /* Align items vertically */ 
+}
+.event-container, .menu-item-container {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    align-items: center;
+}
+.delete-button {
+   margin-left: auto;
+   margin-right: 10px;
+}
 
+.update-button {
+    margin-right:10px;
+}
+
+.add-event, .update-event {
+    width: 50%; /* Adjust width as needed */
+    padding: 0 10px; /* Add padding */
+}
 footer {
     display: flex;
     justify-content: center;

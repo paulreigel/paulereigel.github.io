@@ -28,11 +28,16 @@ Router.post('/', async (request, response) => {
 Router.put('/:id', async (request, response) => {
 	const collection = await getCollection('Events-API', 'Events')
 	const { id } = request.params
-	const name = "test name"
-    const location = "test location"
-    const dates = "test date"
-	const hours = "test hours"
-	const result = await collection.updateOne({ _id: new ObjectId({ id }) }, { $set: { name, location, dates, hours } })
+	 // Perform the update operation
+	 const result = await collection.updateOne(
+		{ _id: new ObjectId(id) },
+		{ $set: { name, location, dates, hours } }
+	);
+	//const name = "test name"
+    //const location = "test location"
+    //const dates = "test date"
+	//const hours = "test hours"
+	//const result = await collection.updateOne({ _id: new ObjectId({ id }) }, { $set: { name, location, dates, hours } })
 	response.json(result)
 })
 

@@ -34,6 +34,7 @@
     
     <div class="admin-events">
     </div>
+    <div class="add-update-container">
     <div class="add-event">
         <h2>Add Event</h2>
         <form id="event-form">
@@ -52,9 +53,30 @@
             <input type="submit" value="Add Event">
         </form>
     </div>
+    
+    <div class="update-event">
+        <h2>Update Event</h2>
+        <form id="update-event-form">
+            <label for="event-name">Name:</label>
+            <input type="text" id="event-name" name="name" required><br><br>
+    
+            <label for="event-location">Location:</label>
+            <input type="text" id="event-location" name="location" required><br><br>
+    
+            <label for="event-dates">Dates:</label>
+            <input type="text" id="event-dates" name="dates" required><br><br>
+    
+            <label for="event-hours">Hours:</label>
+            <input type="text" id="event-hours" name="hours" required><br><br>
+    
+            <input type="submit" value="Update Event ">
+        </form>
+    </div>
+</div>
     <h1 class="home-title">Admin Page | Manage Menu</h1>
     <div class="admin-menu">
     </div>
+    <div class="add-update-menu">
     <div class="add-menu">
         <h2>Add Menu Item</h2>
         <form id="menu-form">
@@ -73,6 +95,25 @@
             <input type="submit" value="Add Item">
         </form>
     </div>
+    <div class="add-menu">
+        <h2>Update Menu Item</h2>
+        <form id="menu-form">
+            <label for="menu-name">Name:</label>
+            <input type="text" id="menu-name" name="name" required><br><br>
+    
+            <label for="menu-description">Description:</label>
+            <input type="text" id="menu-description" name="description" required><br><br>
+    
+            <label for="menu-price">Price:</label>
+            <input type="text" id="menu-price" name="price" required><br><br>
+    
+            <label for="menu-ImgUrl">ImgUrl:</label>
+            <input type="text" id="menu-ImgUrl" name="image" required><br><br>
+    
+            <input type="submit" value="Update Item">
+        </form>
+    </div>
+</div>
     <footer>
         <p>&copy; 2024 Food Truck; Paul Reigel, Donald Honick, Kou Lee</p>
 </footer>
