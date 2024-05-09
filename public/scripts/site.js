@@ -113,7 +113,7 @@ nextMenuButton.addEventListener('click', async () => {
 })
 
 
-})
+});
 
 
 
