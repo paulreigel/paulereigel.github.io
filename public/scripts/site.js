@@ -17,45 +17,108 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// On load of the MENU page it calls the getMenu function to load all the menu item data
+// // On load of the MENU page it calls the getMenu function to load all the menu item data
+// document.addEventListener('DOMContentLoaded', async () => {
+//     await createMenuCards()
+//     await getMenu()
+// })
+
+// // Creates menu item cards dynamically on how many menu items are in the mongodb
+// const createMenuCards = async () => {
+//     const response = await fetch('/api/menu')
+//     const menuItems = await response.json()
+//     const menuContainer = document.querySelectorAll('.menu-container')
+    
+//     menuItems.forEach(async (menuItem, index) => {
+//         menuContainer[0].appendChild(document.createElement('div')).className = 'menu-item'     
+//         const menuItemCard = document.querySelectorAll('.menu-item')
+//         menuItemCard[index].appendChild(document.createElement('h2'))
+//         menuItemCard[index].appendChild(document.createElement('p'))
+//         menuItemCard[index].appendChild(document.createElement('p'))
+//         menuItemCard[index].appendChild(document.createElement('img'))
+//     })  
+// }
+
+// // Fetch menu item data from mongodb and inputs data as text content to it's specific tags
+// const getMenu = async () => {
+//     const response = await fetch('/api/menu')
+//     const menuItems = await response.json()
+    
+//     menuItems.forEach(async (menuItem, index) => {
+//         const currentItem = document.querySelectorAll('.menu-item')[index]
+//         currentItem.querySelector('h2').textContent = menuItem.Name
+//         currentItem.querySelectorAll('p')[0].textContent = menuItem.Description
+//         currentItem.querySelectorAll('p')[1].textContent = menuItem.Price
+//         currentItem.querySelectorAll('img')[0].src = menuItem.ImgURL
+//         currentItem.querySelectorAll('img')[0].alt = menuItem.Name
+//     })
+// }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 document.addEventListener('DOMContentLoaded', async () => {
-    await createMenuCards()
-    await getMenu()
+    const menuCardContainer = document.getElementById('menu-card-container');
+    const prevMenuButton = document.getElementById('prev-menu-button');
+    const nextMenuButton = document.getElementById('next-menu-button');
+
+
+// Function to fetch events from the server
+const getMenu = async () => {
+    try {
+        const response = await fetch('/api/menu')
+        if (!response.ok) {
+            throw new Error('Failed to fetch menu')
+        }
+        return await response.json()
+    } catch (error) {
+        console.error('Error fetching menu:', error)
+        return [];
+    }
+}
+
+
+
+let items = await getMenu()
+let currentMenuIndex = 0
+
+// Function to display current menu name
+const displayMenuItem = () => {
+    const currentMenu = items[currentMenuIndex]
+    menuCardContainer.innerHTML = `
+        <div class="menu-card">
+            <h2>${currentMenu.Name}</h2>
+            <img src=${currentMenu.ImgURL}>
+            <p><strong>Description:</strong> ${currentMenu.Description}</p>
+            <p><strong>Price:</strong> ${currentMenu.Price}</p>
+        </div>`
+}
+
+// Initial display
+displayMenuItem()
+
+// Event listener for previous button
+prevMenuButton.addEventListener('click', async () => {
+    currentMenuIndex = (currentMenuIndex - 1 + items.length) % items.length
+    items = await getMenu() // Fetch updated menu
+    displayMenuItem()
 })
 
-// Creates menu item cards dynamically on how many menu items are in the mongodb
-const createMenuCards = async () => {
-    const response = await fetch('/api/menu')
-    const menuItems = await response.json()
-    const menuContainer = document.querySelectorAll('.menu-container')
-    
-    menuItems.forEach(async (menuItem, index) => {
-        menuContainer[0].appendChild(document.createElement('div')).className = 'menu-item'     
-        const menuItemCard = document.querySelectorAll('.menu-item')
-        menuItemCard[index].appendChild(document.createElement('h2'))
-        menuItemCard[index].appendChild(document.createElement('p'))
-        menuItemCard[index].appendChild(document.createElement('p'))
-        menuItemCard[index].appendChild(document.createElement('img'))
-    })  
-}
+// Event listener for next button
+nextMenuButton.addEventListener('click', async () => {
+    currentMenuIndex = (currentMenuIndex + 1) % items.length;
+    items = await getMenu() // Fetch updated events
+    displayMenuItem()
+})
 
-// Fetch menu item data from mongodb and inputs data as text content to it's specific tags
-const getMenu = async () => {
-    const response = await fetch('/api/menu')
-    const menuItems = await response.json()
-    
-    menuItems.forEach(async (menuItem, index) => {
-        const currentItem = document.querySelectorAll('.menu-item')[index]
-        currentItem.querySelector('h2').textContent = menuItem.Name
-        currentItem.querySelectorAll('p')[0].textContent = menuItem.Description
-        currentItem.querySelectorAll('p')[1].textContent = menuItem.Price
-        currentItem.querySelectorAll('img')[0].src = menuItem.ImgURL
-        currentItem.querySelectorAll('img')[0].alt = menuItem.Name
-    })
-}
 
-/////////////////////////////////////////////////////////////
+})
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //EVENTS FETCH
 (async () => {
     try {
@@ -398,4 +461,4 @@ menuForm.addEventListener('submit', async (e) => {
         console.error('Error adding new menu item:', error);
         // Optionally, handle error and display an error message
     }
-});
+})

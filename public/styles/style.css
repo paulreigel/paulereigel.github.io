@@ -57,6 +57,8 @@
     text-align: center; /* Center-align the text of the paragraph */
     font-size: 25px;
 }
+
+
 /*styles for events container*/
 .events  {
     text-align: center; 
@@ -92,14 +94,14 @@
     right: 0; /* Position the right arrow to the right */
 }
 
-.event-window {
+.event-window, .menu-window {
     position: relative; /* Set container position to relative */
     width: calc(100% - 120px); /* Calculate width of window between arrows */
     margin: 0 auto; /* Center horizontally */
     overflow: hidden; /* Hide overflow */
 }
 
-#event-card-container {
+#event-card-container, #menu-card-container {
     display: flex; /* Use flexbox for event cards */
     flex-direction: column; /* Arrange items vertically */
     justify-content: center; /* Center items vertically */
@@ -108,7 +110,7 @@
     transition: transform 0.5s ease; /* Add smooth transition for sliding effect */
 }
 
-.events button {
+.events button, .items button {
     font-size: 1.2em; /* Larger font size*/ 
     padding: 10px 20px; /* Increase padding*/ 
     margin-top: 5px; /* Add margin on top*/ 
@@ -132,7 +134,7 @@
 }
 
 .event-card,
-.event-details {
+.event-details, .menu-card, .menu-details {
     max-width: 80%; /* Limit the maximum width of the divs */
     margin: 0 auto; /* Center the divs horizontally */
     padding: 20px; /* Add padding for spacing */
@@ -140,8 +142,10 @@
    /* box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
+
+
 /*Menu page styles*/
-.menu-container {
+/* .menu-container {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -157,14 +161,56 @@
 }
 
 .menu-item img {
-    max-width: 100%;
+    max-width: 50%;
     height: auto;
     
-    object-fit: cover;
+    object-fit: scale-down;
     border-radius: 5px;
+} */
+
+.items  {
+    text-align: center; 
+    position: relative; /* Set container position to relative */
+    width: 80%; /* Set the width to 80% of the parent container */
+    margin: 0 auto; /* Center the container horizontally */
+    padding: 20px; /* Add padding for spacing */
+    border: 1px solid #ccc; /* Add a border for visual separation */
+    border-radius: 10px; /* Add border radius for rounded corners */
+    height: 650px; /* Set a fixed height for the event container */
+    overflow: hidden; /* Hide overflow content */
 }
 
-.menu-item h2 {
+.menu-card {
+    display: flex; /* Use flexbox layout */
+    flex-direction: column; /* Arrange child elements vertically */
+    align-items: center; /* Center child elements horizontally */
+    text-align: center; /* Center text within the container */
+  }
+
+.menu-card img {
+    width: 400px; /* Set a fixed width for the image */
+    height: 350px; /* Set a fixed height for the image */
+    object-fit: cover; /* Ensure the image covers the entire space, maintaining aspect ratio */
+    border-radius: 8px; /* Apply rounded corners to the image */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow to the image */
+    margin-bottom: 10px; /* Add some space below the image */
+  }
+
+  .arrow-menu-button {
+    position: absolute; /* Position the buttons absolutely */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust vertical positioning */
+    width: 100px; /* Set button width */
+    height: 100px; /* Set button height */
+    background-color: transparent; /* Transparent background */
+    border: none; /* Remove border */
+    color: #f15723; /* Set button color */
+    font-size: 24px; /* Set font size */
+    cursor: pointer; /* Change cursor on hover */
+    outline: none; /* Remove outline */
+}
+
+.menu-card h2 {
     font-size: 1.7em;
     margin-top: 10px;
 }
@@ -367,3 +413,5 @@ footer {
         max-width: 95%;
     }
 }
+
+/*////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
