@@ -331,6 +331,13 @@ span {
     
     flex-direction: column; /* Align items vertically */ 
 }
+
+#update-menu-form {
+    max-width: 20%; /* Limit the width of the form */
+    
+    flex-direction: column; /* Align items vertically */ 
+}
+
 .delete-button {
    margin-left: auto;
    margin-right: 10px;

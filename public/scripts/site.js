@@ -64,26 +64,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     const nextMenuButton = document.getElementById('next-menu-button');
 
 
-// Function to fetch events from the server
-const getMenu = async () => {
-    try {
-        const response = await fetch('/api/menu')
-        if (!response.ok) {
-            throw new Error('Failed to fetch menu')
-        }
-        return await response.json()
-    } catch (error) {
-        console.error('Error fetching menu:', error)
-        return [];
-    }
-}
 
+// Function to fetch menu items from database
+const getMenu = async () => {
+        const response = await fetch('/api/menu')
+        return await response.json()
+}
 
 
 let items = await getMenu()
 let currentMenuIndex = 0
 
-// Function to display current menu name
+// Function to display current menu item name
 const displayMenuItem = () => {
     const currentMenu = items[currentMenuIndex]
     menuCardContainer.innerHTML = `
@@ -101,17 +93,16 @@ displayMenuItem()
 // Event listener for previous button
 prevMenuButton.addEventListener('click', async () => {
     currentMenuIndex = (currentMenuIndex - 1 + items.length) % items.length
-    items = await getMenu() // Fetch updated menu
+    items = await getMenu()
     displayMenuItem()
 })
 
 // Event listener for next button
 nextMenuButton.addEventListener('click', async () => {
     currentMenuIndex = (currentMenuIndex + 1) % items.length;
-    items = await getMenu() // Fetch updated events
+    items = await getMenu() 
     displayMenuItem()
 })
-
 
 });
 
@@ -245,29 +236,17 @@ const displayEventNames = (events) => {
         checkbox.addEventListener('change', () => {
             eventDetails.style.display = checkbox.checked ? 'block' : 'none';
         });
-
-        // Event listener for update button
-        /*updateButton.addEventListener('click', async () => {
-            try {
-                // Fetch event data from the API
-                const response = await fetch(`/api/events/${event._id}`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch event data');
-                }
-                const eventData = await response.json();
         
-                // Populate the update form with the event data
-                const updateForm = document.getElementById('update-event-form');
-                updateForm.querySelector('event-name').value = eventData.name;
-                updateForm.querySelector('event-location').value = eventData.location;
-                updateForm.querySelector('event-dates').value = eventData.dates;
-                updateForm.querySelector('#event-hours').value = eventData.hours;
-            } catch (error) {
-                console.error('Error updating event:', error);
-            }
-        });*/
+        // Populates current event data into textboxes
+        updateButton.addEventListener('click', () => {
+            const updateForm = document.getElementById('update-event-form')
+            updateForm.querySelector('#event-name').value = event.name
+            updateForm.querySelector('#event-location').value = event.location
+            updateForm.querySelector('#event-dates').value = event.dates
+            updateForm.querySelector('#event-hours').value = event.hours
+        })
 
-        //////////////
+        
         deleteButton.addEventListener('click', async () => {
             try {
                 // Send DELETE request to API endpoint
@@ -284,18 +263,12 @@ const displayEventNames = (events) => {
             } catch (error) {
                 console.error('Error deleting event:', error);
             }
-            // Event listener for update button
-        updateButton.addEventListener('click', () => {
-            // Handle update button click event
-            // You can add your update logic here
-            console.log('Update button clicked for event:', event);
         });
-        }); // <-- Added closing bracket for deleteButton.addEventListener
+
         adminEventsDiv.appendChild(eventContainer);
     });
+    
 };////below is update in div GOOD CODE ABOVE
-
-
 
       
 //////////////////////////////////////////////////////////////////////////////
@@ -336,6 +309,11 @@ const displayMenuItems = (menuItems) => {
         deleteButton.classList.add('delete-button');
         menuItemContainer.appendChild(deleteButton);
 
+        const updateButton = document.createElement('button')
+        updateButton.textContent = 'Update'
+        updateButton.classList.add('update-button')
+        menuItemContainer.appendChild(updateButton)
+
         const itemDetails = document.createElement('div');
         itemDetails.classList.add('menu-item-details');
         itemDetails.innerHTML = `
@@ -349,6 +327,16 @@ const displayMenuItems = (menuItems) => {
         checkbox.addEventListener('change', () => {
             itemDetails.style.display = checkbox.checked ? 'block' : 'none';
         });
+
+        // Populates current event data into textboxes
+        updateButton.addEventListener('click', () => {
+            const updateForm = document.getElementById('update-menu-form')
+            updateForm.querySelector('#menu-name').value = menuItem.Name
+            updateForm.querySelector('#menu-description').value = menuItem.Description
+            updateForm.querySelector('#menu-price').value = menuItem.Price
+            updateForm.querySelector('#menu-ImgUrl').value = menuItem.ImgURL
+        })
+
         ////////////////////////DELETE
 
        deleteButton.addEventListener('click', async () => {
@@ -368,6 +356,9 @@ const displayMenuItems = (menuItems) => {
                 console.error('Error deleting menu item:', error);
             }
         });
+
+      
+        
 
         adminMenuDiv.appendChild(menuItemContainer);
     });
