@@ -226,6 +226,7 @@ const displayEventNames = (events) => {
         const eventDetails = document.createElement('div');
         eventDetails.classList.add('event-details');
         eventDetails.innerHTML = `
+            <p hidden><strong>ID:</strong> ${event._id}</p>
             <p><strong>Location:</strong> ${event.location}</p>
             <p><strong>Dates:</strong> ${event.dates}</p>
             <p><strong>Hours:</strong> ${event.hours}</p>
@@ -235,15 +236,17 @@ const displayEventNames = (events) => {
 
         checkbox.addEventListener('change', () => {
             eventDetails.style.display = checkbox.checked ? 'block' : 'none';
+            checkboxLabel.textContent = checkbox.checked ? 'Less Info' : 'More Info'
         });
         
         // Populates current event data into textboxes
         updateButton.addEventListener('click', () => {
             const updateForm = document.getElementById('update-event-form')
-            updateForm.querySelector('#event-name').value = event.name
-            updateForm.querySelector('#event-location').value = event.location
-            updateForm.querySelector('#event-dates').value = event.dates
-            updateForm.querySelector('#event-hours').value = event.hours
+            updateForm.querySelector('#event-id').value = event._id
+            updateForm.querySelector('#update-event-name').value = event.name
+            updateForm.querySelector('#update-event-location').value = event.location
+            updateForm.querySelector('#update-event-dates').value = event.dates
+            updateForm.querySelector('#update-event-hours').value = event.hours
         })
 
         
@@ -317,6 +320,7 @@ const displayMenuItems = (menuItems) => {
         const itemDetails = document.createElement('div');
         itemDetails.classList.add('menu-item-details');
         itemDetails.innerHTML = `
+            <p hidden><strong>ID:</strong> ${menuItem._id}</p>
             <p><strong>Description:</strong> ${menuItem.Description}</p>
             <p><strong>Price:</strong> ${menuItem.Price}</p>
             <img src="${menuItem.ImgURL}" alt="${menuItem.Name}" width="200">
@@ -326,15 +330,17 @@ const displayMenuItems = (menuItems) => {
 
         checkbox.addEventListener('change', () => {
             itemDetails.style.display = checkbox.checked ? 'block' : 'none';
+            checkboxLabel.textContent = checkbox.checked ? 'Less Info' : 'More Info'
         });
 
         // Populates current menu items data into textboxes
         updateButton.addEventListener('click', () => {
             const updateForm = document.getElementById('update-menu-form')
-            updateForm.querySelector('#menu-name').value = menuItem.Name
-            updateForm.querySelector('#menu-description').value = menuItem.Description
-            updateForm.querySelector('#menu-price').value = menuItem.Price
-            updateForm.querySelector('#menu-ImgUrl').value = menuItem.ImgURL
+            updateForm.querySelector('#menu-id').value = menuItem._id
+            updateForm.querySelector('#update-menu-name').value = menuItem.Name
+            updateForm.querySelector('#update-menu-description').value = menuItem.Description
+            updateForm.querySelector('#update-menu-price').value = menuItem.Price
+            updateForm.querySelector('#update-menu-imgUrl').value = menuItem.ImgURL
         })
 
         ////////////////////////DELETE
@@ -453,3 +459,93 @@ menuForm.addEventListener('submit', async (e) => {
         // Optionally, handle error and display an error message
     }
 })
+/////////////////////////////////////////////////////////////
+//UPDATE EVENTS
+const updateEventForm = document.getElementById('update-event-form');
+
+updateEventForm.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Prevent form submission
+    
+    // Get form input values
+    const id = document.getElementById('event-id').value;
+    const name = document.getElementById('update-event-name').value;
+    const location = document.getElementById('update-event-location').value;
+    const dates = document.getElementById('update-event-dates').value;
+    const hours = document.getElementById('update-event-hours').value;
+    
+    // Create data object
+    const updateEventData = { name, location, dates, hours };
+    
+    try {
+        // Send POST request to API endpoint
+        const response = await fetch('/api/events/' + id, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updateEventData)
+        });
+        
+        // Check if request was successful
+        if (response.ok) {
+            const updatedEvent = await response.json();
+            window.location.reload();//refresh the page after event is added
+            console.log('Event Updated:', updatedEvent);
+            
+            // Clear form inputs
+            updateEventForm.reset();
+            
+        } else {
+            console.error('Failed to update event');
+            //  handle error and display an error message
+        }
+    } catch (error) {
+        console.error('Error updating event:', error);
+        
+    }
+});
+/////////////////////////////////////////////////////////////
+//UPDATE MENU
+const updateMenuForm = document.getElementById('update-menu-form');
+
+updateMenuForm.addEventListener('submit', async (e) => {
+    e.preventDefault(); // Prevent form submission
+    
+    // Get form input values
+    const id = document.getElementById('menu-id').value;
+    const Name = document.getElementById('update-menu-name').value;
+    const Description = document.getElementById('update-menu-description').value;
+    const Price = document.getElementById('update-menu-price').value;
+    const ImgURL = document.getElementById('update-menu-imgUrl').value;
+    
+    // Create data object
+    const updateMenuData = { Name, Description, Price, ImgURL };
+    
+    try {
+        // Send POST request to API endpoint
+        const response = await fetch('/api/menu/' + id, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updateMenuData)
+        });
+        
+        // Check if request was successful
+        if (response.ok) {
+            const updatedMenu = await response.json();
+            window.location.reload();//refresh the page after event is added
+            console.log('Menu Updated:', updatedMenu);
+            
+            // Clear form inputs
+            updateMenuForm.reset();
+            
+        } else {
+            console.error('Failed to update menu');
+            //  handle error and display an error message
+        }
+    } catch (error) {
+        console.error('Error updating menu:', error);
+        
+    }
+});

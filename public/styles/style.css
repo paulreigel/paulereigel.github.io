@@ -264,12 +264,15 @@
 .contact-form input[type="submit"]:hover {
     background-color: #d14000;
 }
+
 /*admin page manage events div*/
+
 .admin-events {
-    width: 80%;
-    margin: 0 auto;
+    margin-left: 10%;
+    margin-right: 10%;
     overflow: auto;
     border: 1px solid black;
+    border-bottom: 0px;
     text-align: center;
 }
 
@@ -280,11 +283,13 @@ span {
 }
 
 /*admin page manage events div*/
-.admin-menu {
-    width: 80%;
-    margin: 0 auto;
+
+.admin-events {
+    margin-left: 10%;
+    margin-right: 10%;
     overflow: auto;
     border: 1px solid black;
+    border-bottom: 0px;
     text-align: center;
 }
 
@@ -294,38 +299,70 @@ span {
     padding: 10px;
 }
 
- label {
+/*admin page manage events div*/
+
+.admin-menu {
+    margin-left: 10%;
+    margin-right: 10%;
+    overflow: auto;
+    border: 1px solid black;
+    border-bottom: 0px;
+    text-align: center;
+}
+
+span {
+    font-weight: bold;
+    font-size: larger;
+    padding: 10px;
+}
+
+label {
     font-size: 10px;
     margin-left: 10px;
 }
+
 /*add event div*/
+
 .add-event, .add-menu  {
-    font-family: Arial, Helvetica, sans-serif;
-    max-width: 100%;
     margin-left: 10%; 
 }
+
+.add-event, .update-event, .add-menu, .update-menu {
+    width: 50%; /* Adjust width as needed */
+    padding: 0 10px; /* Add padding */
+    border: 1px solid;
+    border-top: 0px;
+}
+
 .add-update-container, .add-update-menu {
     display: flex;
     font-family: Arial, Helvetica, sans-serif;
 }
+
 .add-event form {
     max-width: 20%; /* Limit the width of the form */
     
     flex-direction: column; /* Align items vertically */ 
 }
+
  .update-event, .update-menu {
-    margin-right: 20px; 
+    margin-right: 10%; 
+    border-left: 0px;
 }
-.update-event form {
-    max-width: 20%; /* Limit the width of the form */
+
+.update-event-form, .event-form {
+    max-width: 30%; /* Limit the width of the form */
     
     flex-direction: column; /* Align items vertically */ 
 }
+
 .event-container, .menu-item-container {
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     align-items: center;
+    border-bottom: solid black 1px;
 }
+
 #menu-form {
     max-width: 20%; /* Limit the width of the form */
     
@@ -347,10 +384,17 @@ span {
     margin-right:10px;
 }
 
-.add-event, .update-event {
+.add-event, .update-event, .add-menu, .update-menu {
     width: 50%; /* Adjust width as needed */
     padding: 0 10px; /* Add padding */
+
 }
+
+.menu-item-details {
+    align-self: auto;
+    padding: 5px;
+}
+
 footer {
     display: flex;
     justify-content: center;

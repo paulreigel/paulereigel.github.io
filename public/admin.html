@@ -38,38 +38,40 @@
     <div class="add-event">
         <h2>Add Event</h2>
         <form id="event-form">
-            <label for="event-name">Name:</label>
+            <label for="event-name">Name:</label><br>
             <input type="text" id="event-name" name="name" required><br><br>
     
-            <label for="event-location">Location:</label>
+            <label for="event-location">Location:</label><br>
             <input type="text" id="event-location" name="location" required><br><br>
     
-            <label for="event-dates">Dates:</label>
+            <label for="event-dates">Dates:</label><br>
             <input type="text" id="event-dates" name="dates" required><br><br>
     
-            <label for="event-hours">Hours:</label>
+            <label for="event-hours">Hours:</label><br>
             <input type="text" id="event-hours" name="hours" required><br><br>
     
-            <input type="submit" value="Add Event">
+            <input type="submit" value="Add Event"><br><br>
         </form>
     </div>
     
     <div class="update-event">
         <h2>Update Event</h2>
         <form id="update-event-form">
-            <label for="event-name">Name:</label>
-            <input type="text" id="event-name" name="name" required><br><br>
+            <input type="hidden" id="event-id" name="id" required>
+
+            <label for="event-name">Name:</label><br>
+            <input type="text" id="update-event-name" name="name" required><br><br>
     
-            <label for="event-location">Location:</label>
-            <input type="text" id="event-location" name="location" required><br><br>
+            <label for="event-location">Location:</label><br>
+            <input type="text" id="update-event-location" name="location" required><br><br>
     
-            <label for="event-dates">Dates:</label>
-            <input type="text" id="event-dates" name="dates" required><br><br>
+            <label for="event-dates">Dates:</label><br>
+            <input type="text" id="update-event-dates" name="dates" required><br><br>
     
-            <label for="event-hours">Hours:</label>
-            <input type="text" id="event-hours" name="hours" required><br><br>
+            <label for="event-hours">Hours:</label><br>
+            <input type="text" id="update-event-hours" name="hours" required><br><br>
     
-            <input type="submit" value="Update Event ">
+            <input type="submit" value="Update Event "><br><br>
         </form>
     </div>
 </div>
@@ -80,37 +82,39 @@
     <div class="add-menu">
         <h2>Add Menu Item</h2>
         <form id="menu-form">
-            <label for="menu-name">Name:</label>
+            <label for="menu-name">Name:</label><br>
             <input type="text" id="menu-name" name="name" required><br><br>
     
-            <label for="menu-description">Description:</label>
+            <label for="menu-description">Description:</label><br>
             <input type="text" id="menu-description" name="description" required><br><br>
     
-            <label for="menu-price">Price:</label>
+            <label for="menu-price">Price:</label><br>
             <input type="text" id="menu-price" name="price" required><br><br>
     
-            <label for="menu-ImgUrl">ImgUrl:</label>
+            <label for="menu-ImgUrl">ImgUrl:</label><br>
             <input type="text" id="menu-ImgUrl" name="image" required><br><br>
     
-            <input type="submit" value="Add Item">
+            <input type="submit" value="Add Item"><br><br>
         </form>
     </div>
     <div class="update-menu">
         <h2>Update Menu Item</h2>
         <form id="update-menu-form">
-            <label for="menu-name">Name:</label>
-            <input type="text" id="menu-name" name="name" required><br><br>
+            <input type="hidden" id="menu-id" name="id" required>
+
+            <label for="menu-name">Name:</label><br>
+            <input type="text" id="update-menu-name" name="name" required><br><br>
     
-            <label for="menu-description">Description:</label>
-            <input type="text" id="menu-description" name="description" required><br><br>
+            <label for="menu-description">Description:</label><br>
+            <input type="text" id="update-menu-description" name="description" required><br><br>
     
-            <label for="menu-price">Price:</label>
-            <input type="text" id="menu-price" name="price" required><br><br>
+            <label for="menu-price">Price:</label><br>
+            <input type="text" id="update-menu-price" name="price" required><br><br>
     
-            <label for="menu-ImgUrl">ImgUrl:</label>
-            <input type="text" id="menu-ImgUrl" name="image" required><br><br>
+            <label for="menu-ImgUrl">ImgUrl:</label><br>
+            <input type="text" id="update-menu-imgUrl" name="image" required><br><br>
     
-            <input type="submit" value="Update Item">
+            <input type="submit" value="Update Item"><br><br>
         </form>
     </div>
 </div>

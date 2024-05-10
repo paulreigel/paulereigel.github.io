@@ -28,10 +28,7 @@ Router.post('/', async (request, response) => {
 Router.put('/:id', async (request, response) => {
 	const collection = await getCollection('Menu-API', 'Menu')
 	const { id } = request.params
-	const Name = "test name"
-    const Description = "test desc"
-    const Price = "$test price"
-	const ImgURL = "https://www.steaksandgame.com/images/Product/medium/exotic-eats-what-does-alligator-taste-like-1S-5862.jpg"
+	const { Name, Description, Price, ImgURL } = request.body
 	const result = await collection.updateOne({ _id: new ObjectId({ id }) }, { $set: { Name, Description, Price, ImgURL } })
 	response.json(result)
 })
