@@ -328,7 +328,7 @@ const displayMenuItems = (menuItems) => {
             itemDetails.style.display = checkbox.checked ? 'block' : 'none';
         });
 
-        // Populates current event data into textboxes
+        // Populates current menu items data into textboxes
         updateButton.addEventListener('click', () => {
             const updateForm = document.getElementById('update-menu-form')
             updateForm.querySelector('#menu-name').value = menuItem.Name
