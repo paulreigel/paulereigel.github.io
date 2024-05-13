@@ -144,30 +144,6 @@
 
 
 
-/*Menu page styles*/
-/* .menu-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-.menu-item {
-    width: 30%;
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.menu-item img {
-    max-width: 50%;
-    height: auto;
-    
-    object-fit: scale-down;
-    border-radius: 5px;
-} */
-
 .items  {
     text-align: center; 
     position: relative; /* Set container position to relative */
